@@ -21,8 +21,8 @@ function switchToMeditationA() {
 }
 
 function switchToMeditationB() {
-    videoElement.src = 'Sounds/rain.mp4';
-    audioElement.src = 'Sounds/rain.mp3';
+    videoElement.src = './Sounds/rain.mp4';
+    audioElement.src = './Sounds/rain.mp3';
     videoElement.play();
     audioElement.play();
 }
