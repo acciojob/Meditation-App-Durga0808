@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let timeLeft = 600; // Default to 10 minutes
 
   // Initialize display with required format "10:0"
-  timeDisplay.textContent = "10:0";
+  updateTimeDisplay();
+
   function updateTimeDisplay() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
@@ -31,15 +32,14 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTimeDisplay();
     intervalId = setInterval(function () {
       timeLeft--;
-      if (timeLeft < 0) {
+      updateTimeDisplay();
+      if (timeLeft <= 0) {
         clearInterval(intervalId);
         isPlaying = false;
         playPauseBtn.textContent = "Play";
         videoPlayer.pause();
         audioPlayer.pause();
-        return;
       }
-      updateTimeDisplay();
     }, 1000);
   }
 
