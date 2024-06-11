@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meditation App</title>
-    <link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <div id="app">
+	<!-- the entire body must be written by student -->
+	 <div id="app">
         <div class="vid-container">
-            <video id="meditation-video" src="https://www.youtube.com/watch?v=6rd6NCoDKDc&ab_channel=%C3%96zg%C3%BCweb" controls autoplay loop></video>
+            <video id="meditationVideo" loop></video>
         </div>
         <div class="player-container">
-            <audio id="meditation-audio" src="https://pixabay.com/sound-effects/sandy-beach-calm-waves-water-nature-sounds-8052/" loop></audio>
+            <audio id="meditationAudio" loop></audio>
+            <div class="sound-picker">
+                <button onclick="switchSound('beach')">Meditation-A</button>
+                <button onclick="switchSound('rain')">Meditation-B</button>
+            </div>
         </div>
-        <div class="sound-picker">
-            <button id="sound-1">Sound 1</button>
-            <button id="sound-2">Sound 2</button>
+        <div>
+            <button class="play" onclick="togglePlayPause()">Play/Pause</button>
         </div>
-        <div class="time-buttons">
-            <button id="smaller-mins">2 min</button>
-            <button id="medium-mins">5 min</button>
-            <button id="long-mins">10 min</button>
+        <div class="time-select">
+            <button id="smaller-mins" onclick="setTime(2)">2 Min</button>
+            <button id="medium-mins" onclick="setTime(5)">5 Min</button>
+            <button id="long-mins" onclick="setTime(10)">10 Min</button>
         </div>
-        <div class="time-display">10:0</div>
-        <button id="play-pause" class="play">Play</button>
+        <div class="time-display">10:00</div>
     </div>
-    <script src="script.js"></script>
+    <script type="text/javascript" src="./script.js">
+</script>
+
 </body>
+
 </html>

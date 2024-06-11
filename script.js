@@ -1,74 +1,51 @@
 //your JS code here. If required.
-document.addEventListener("DOMContentLoaded", function() {
-    const video = document.getElementById('meditation-video');
-    const audio = document.getElementById('meditation-audio');
-    const display = document.getElementById('display');
-    const playPauseBtn = document.getElementById('play-pause');
+const app = document.getElementById('app');
+const video = document.getElementById('meditationVideo');
+const audio = document.getElementById('meditationAudio');
+const soundPicker = document.querySelector('.sound-picker');
+const timeDisplay = document.querySelector('.time-display');
+let timer;
 
-    // Variables for controlling timer
-    let timer;
-    let time = 10 * 60; // Initial time in seconds
-    let isPlaying = false;
+function switchSound(sound) {
+    audio.src = `Sounds/${sound}.mp3`;
+    video.src = `video/${sound}.mp4`;
+}
 
-    // Update the time display
-    function updateTime() {
-        const minutes = Math.floor(time / 60);
-        const seconds = time % 60;
-        display.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+function togglePlayPause() {
+    if (audio.paused) {
+        audio.play();
+        video.play();
+        updateTimer();
+    } else {
+        audio.pause();
+        video.pause();
+        clearInterval(timer);
     }
+}
 
-    // Start the timer
-    function startTimer(duration) {
-        time = duration;
-        timer = setInterval(function() {
-            if (time > 0) {
-                time--;
-                updateTime();
-            } else {
-                clearInterval(timer);
-                isPlaying = false;
-                playPauseBtn.textContent = 'Play';
-            }
-        }, 1000);
-    }
+function setTime(minutes) {
+    clearInterval(timer);
+    const totalSeconds = minutes * 60;
+    let seconds = totalSeconds;
+    
+    updateTimer();
 
-    // Event listeners for play/pause button
-    playPauseBtn.addEventListener('click', function() {
-        if (isPlaying) {
+    timer = setInterval(() => {
+        if (seconds <= 0) {
+            clearInterval(timer);
             audio.pause();
             video.pause();
-            clearInterval(timer);
-            isPlaying = false;
-            playPauseBtn.textContent = 'Play';
         } else {
-            audio.play();
-            video.play();
-            startTimer(time);
-            isPlaying = true;
-            playPauseBtn.textContent = 'Pause';
+            seconds--;
+            updateTimer();
         }
-    });
+    }, 1000);
+}
 
-    // Event listener for time buttons
-    const timeButtons = document.querySelectorAll('.time-buttons button');
-    timeButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            const timeStr = button.textContent.split(' ')[0];
-            const minutes = parseInt(timeStr);
-            if (!isNaN(minutes)) {
-                time = minutes * 60;
-                updateTime();
-            }
-        });
-    });
-
-    // Event listener for sound picker buttons
-    const soundButtons = document.querySelectorAll('.sound-picker button');
-    soundButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            const soundFile = button.id === 'sound-1' ? 'beach.mp3' : 'rain.mp3';
-            audio.src = `sounds/${soundFile}`;
-            audio.play();
-        });
-    });
-});
+function updateTimer() {
+    const minutes = Math.floor(audio.currentTime / 60);
+    const seconds = Math.floor(audio.currentTime % 60);
+    const displayMinutes = String(minutes).padStart(2, '0');
+    const displaySeconds = String(seconds).padStart(2, '0');
+    timeDisplay.textContent = `${displayMinutes}:${displaySeconds}`;
+}
