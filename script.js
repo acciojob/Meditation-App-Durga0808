@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let intervalId;
   let timeLeft = 600; // Default to 10 minutes
 
+  // Initialize display with required format "10:0"
+  timeDisplay.textContent = "10:0";
+
   function updateTimeDisplay() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
@@ -103,5 +106,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Set initial video and audio
   switchVideo("beach", "beach");
-  updateTimeDisplay();
 });
