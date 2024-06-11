@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let isPlaying = false;
   let intervalId;
-  let timeLeft = 600;
+  let timeLeft = 600; // Default to 10 minutes
 
   function updateTimeDisplay() {
     const minutes = Math.floor(timeLeft / 60);
@@ -18,8 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function switchVideo(videoSrc, audioSrc) {
-    videoPlayer.src = `video/${videoSrc}.mp4`;
-    audioPlayer.src = `audio/${audioSrc}.mp3`;
+    videoPlayer.src = `sounds/${videoSrc}.mp4`;
+    audioPlayer.src = `sounds/${audioSrc}.mp3`;
+    videoPlayer.load(); // Ensure the new video is loaded
+    audioPlayer.load(); // Ensure the new audio is loaded
   }
 
   function startTimer(duration) {
@@ -28,12 +30,15 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTimeDisplay();
     intervalId = setInterval(function () {
       timeLeft--;
-      updateTimeDisplay();
-      if (timeLeft === 0) {
+      if (timeLeft < 0) {
         clearInterval(intervalId);
         isPlaying = false;
         playPauseBtn.textContent = "Play";
+        videoPlayer.pause();
+        audioPlayer.pause();
+        return;
       }
+      updateTimeDisplay();
     }, 1000);
   }
 
@@ -45,10 +50,13 @@ document.addEventListener("DOMContentLoaded", function () {
       isPlaying = false;
       playPauseBtn.textContent = "Play";
     } else {
-      videoPlayer.play();
-      audioPlayer.play();
+      videoPlayer.play().catch(handlePlayError);
+      audioPlayer.play().catch(handlePlayError);
       isPlaying = true;
       playPauseBtn.textContent = "Pause";
+      if (!intervalId) {
+        startTimer(timeLeft);
+      }
     }
   });
 
@@ -60,8 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
         switchVideo("rain", "rain");
       }
       if (isPlaying) {
-        videoPlayer.play();
-        audioPlayer.play();
+        videoPlayer.play().catch(handlePlayError);
+        audioPlayer.play().catch(handlePlayError);
       }
     });
   });
@@ -76,11 +84,24 @@ document.addEventListener("DOMContentLoaded", function () {
         startTimer(600);
       }
       if (!isPlaying) {
-        videoPlayer.play();
-        audioPlayer.play();
+        videoPlayer.play().catch(handlePlayError);
+        audioPlayer.play().catch(handlePlayError);
         isPlaying = true;
         playPauseBtn.textContent = "Pause";
       }
     });
   });
+
+  function handlePlayError(error) {
+    console.error("Play error:", error);
+    if (error.name === "AbortError") {
+      console.warn("The play() request was interrupted by a call to pause()");
+    } else {
+      console.error("Unhandled play error:", error);
+    }
+  }
+
+  // Set initial video and audio
+  switchVideo("beach", "beach");
+  updateTimeDisplay();
 });
