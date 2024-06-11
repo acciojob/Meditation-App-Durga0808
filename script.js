@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let intervalId;
   let timeLeft = 600; // Default to 10 minutes
 
-  // Initialize display with required format "10:0"
-  updateTimeDisplay();
+  // Initialize display with required format "10:00"
+  timeDisplay.textContent = "10:0";
 
   function updateTimeDisplay() {
     const minutes = Math.floor(timeLeft / 60);
