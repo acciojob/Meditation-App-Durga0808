@@ -3,35 +3,39 @@
 <html>
 
 <head>
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
-	<!-- the entire body must be written by student -->
-	 <div id="app">
-        <div class="vid-container">
-            <video id="meditationVideo" loop></video>
-        </div>
-        <div class="player-container">
-            <audio id="meditationAudio" loop></audio>
-            <div class="sound-picker">
-                <button onclick="switchSound('beach')">Meditation-A</button>
-                <button onclick="switchSound('rain')">Meditation-B</button>
-            </div>
-        </div>
-        <div>
-            <button class="play" onclick="togglePlayPause()">Play/Pause</button>
-        </div>
-        <div class="time-select">
-            <button id="smaller-mins" onclick="setTime(2)">2 Min</button>
-            <button id="medium-mins" onclick="setTime(5)">5 Min</button>
-            <button id="long-mins" onclick="setTime(10)">10 Min</button>
-        </div>
-        <div class="time-display">10:00</div>
-    </div>
-    <script type="text/javascript" src="./script.js">
-</script>
-
+	<div class="app">
+		<div class="vid-container">
+			<video id="meditationVideo" loop>
+				<source src="C:\Users\user\Downloads\stock-footage-phuket-thailand-tropical-beach-aerial-drone-top-down-view-bird-eye-view-of-sea-blue-waves-break-on.mp4" type="video/mp4">
+				<source src="C:\Users\user\Downloads\stock-footage--k-loop-rain-drops-falling-alpha-real-rain-high-quality-slow-rain-thunder-speedy-night.webm" type="video/mp4">
+			</video>
+		</div>
+		<div class="player-container">
+			<audio id="meditationAudio" loop>
+				<source src="C:\Users\user\Downloads\mixkit-sea-waves-with-birds-loop-1185.wav" type="audio/mp3">
+				<source src="C:\Users\user\Downloads\LVBN9P3-sunrise-birds.mp3" type="audio/mp3">
+			</audio>
+			<div class="sound-picker">
+				<button id="sound1" onclick="changeSound('beach.mp3')"><i class="fa-solid fa-sun"></i></button>
+				<button id="sound2" onclick="changeSound('rain.mp3')"><i class="fa-solid fa-cloud-rain"></i></button>
+			</div>
+		</div>
+		<div id="time-select">
+			<button id="smaller-mins">2 min</button>
+			<button id="medium-mins">5 min</button>
+			<button id="long-mins">10 min</button>
+		</div>
+		<div class="circle">
+			<button class="play" onclick="play()"><i class="fa-solid fa-play"></i></button>
+		</div>
+		<span class="time-display">10.0</span>
+	</div>
+    <script type="text/javascript" src="./script.js"></script>
 </body>
 
 </html>
