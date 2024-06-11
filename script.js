@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener("DOMContentLoaded", function () {
   const videoPlayer = document.getElementById("videoPlayer");
   const audioPlayer = document.getElementById("audioPlayer");
