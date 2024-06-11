@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditation App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
-
+    <div id="app">
+        <div class="vid-container">
+            <video id="meditation-video" src="https://www.youtube.com/watch?v=6rd6NCoDKDc&ab_channel=%C3%96zg%C3%BCweb" controls autoplay loop></video>
+        </div>
+        <div class="player-container">
+            <audio id="meditation-audio" src="https://pixabay.com/sound-effects/sandy-beach-calm-waves-water-nature-sounds-8052/" loop></audio>
+        </div>
+        <div class="sound-picker">
+            <button id="sound-1">Sound 1</button>
+            <button id="sound-2">Sound 2</button>
+        </div>
+        <div class="time-buttons">
+            <button id="smaller-mins">2 min</button>
+            <button id="medium-mins">5 min</button>
+            <button id="long-mins">10 min</button>
+        </div>
+        <div class="time-display">10:0</div>
+        <button id="play-pause" class="play">Play</button>
+    </div>
+    <script src="script.js"></script>
 </body>
-
 </html>
