@@ -16,8 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateTimeDisplay() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
-    timeDisplay.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    timeDisplay.textContent = `${minutes}:${seconds}`;
   }
+
 
   function switchVideo(videoSrc, audioSrc) {
     videoPlayer.src = `sounds/${videoSrc}.mp4`;
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     audioPlayer.load(); // Ensure the new audio is loaded
   }
 
-  function startTimer(duration) {
+   function startTimer(duration) {
     clearInterval(intervalId);
     timeLeft = duration;
     updateTimeDisplay();
@@ -42,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, 1000);
   }
-
   playPauseBtn.addEventListener("click", function () {
     if (isPlaying) {
       videoPlayer.pause();
